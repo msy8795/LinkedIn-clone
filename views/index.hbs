@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Linkedin</title>
+
+        <link rel="shortcut icon" type="image/png" href="/images/favicon.ico" />
+        <link rel="stylesheet" href="./css/style.css" />
+
+
+    </head>
+    <body>
+        <!-- HEADER -->
+        <header id="main-header">
+            <div>
+                <div>
+                    <img
+                        id="header-logo"
+                        src="/images/linkedin.png"
+                        alt="LinkedIn"
+                    />
+                    <img
+                        id="header-picture-menu"
+                        src="/images/picture.jpeg"
+                        alt="Profile picture"
+                    />
+                    <span id="header-picture-menu-bars">
+                        <span class="fas fa-bars"></span>
+                    </span>
+
+                    <div>
+                        <input
+                            id="search"
+                            type="text"
+                            placeholder="       Search"
+                            onfocus="toggleSearchInput()"
+                            onblur="toggleSearchInput()"
+                        />
+                        <span id="search-icon" class="fas fa-search"></span>
+                        <span id="search-button" class="fas fa-search"></span>
+                    </div>
+                    <span class="fas fa-comments"></span>
+                </div>
+                <nav>
+                    <ul>
+                        <li>
+                            <div id="home" class="selected">
+                                <span class="fas fa-home"></span>
+                                <span class="nav-item-text">Home</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <span class="fas fa-user-friends"></span>
+                                <span class="nav-item-text">My Network</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <span class="fas fa-suitcase"></span>
+                                <span class="nav-item-text">Jobs</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <span class="fas fa-envelope"></span>
+                                <span class="nav-item-text">Messaging</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <span class="fas fa-bell"></span>
+                                <span class="nav-item-text">Notifications</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div id="right-border">
+                                <img
+                                    src="https://img.freepik.com/free-vector/flat-befana-illustration_23-2149195523.jpg?w=740&t=st=1672756936~exp=1672757536~hmac=5d4d60bfdd9ad50d5c097bf2f744960f655b28d1d3c39f88d9720b3135217798"
+                                    alt="Profile picture"
+                                />
+
+                                <span class="nav-item-text">
+                                    Me<span class="fas fa-caret-down"> </span
+                                ></span>
+                            </div>
+                        </li>
+                        
+                        
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- LOADING PAGE -->
+        <div id="loading-page">
+            <div>
+                <img src="/images/linkedin.png" alt="" />
+                <div id="dot-loader">
+                    <div class="lds-ellipsis">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container">
+            <div id="main-wrapper">
+                <main id="main-section">
+                    <div id="share-box">
+                        <div id="button-box">
+                            <button id="btn-post">
+                                <span class="fas fa-edit"></span>
+                                <span id="btn-text">Start a post</span>
+                            </button>
+                            <button id="btn-picture">
+                                <span class="fas fa-camera"></span>
+                            </button>
+                            <button id="btn-document">
+                                <span class="fas fa-file"></span>
+                            </button>
+                        </div>
+                        <div id="link-box">
+                            <a href="/post">Write an article</a>
+                            <span>on LinkedIn</span>
+                        </div>
+                    </div>
+                    <div id="feed-sort">
+                        <hr />
+                        <button>
+                            <span>Sort by:</span>
+                            <strong>Top</strong>
+                            <span class="fas fa-sort-down"></span>
+                        </button>
+                    </div>
+
+                    {{#if data}}
+                    <div>
+                        {{#each data}}
+                    <article>
+                        <div id="post-author">
+                            <a href="#">
+                                <div>
+                                    <img
+                                        src="https://img.freepik.com/free-vector/flat-befana-illustration_23-2149195523.jpg?w=740&t=st=1672756936~exp=1672757536~hmac=5d4d60bfdd9ad50d5c097bf2f744960f655b28d1d3c39f88d9720b3135217798"
+                                        alt=""
+                                    />
+                                    <div>
+                                        <div>
+                                            <strong id="post-author-name"
+                                                >Deepak Yadav</strong
+                                            >
+                                            <span>
+                                                <span>&nbsp;·&nbsp;</span>
+                                                1st</span
+                                            >
+                                        </div>
+                                        <span
+                                            >Student at NIT Jalandhar</span
+                                        >
+                                        <span>12h</span>
+                                    </div>
+                                </div>
+                            </a>
+                            <div>
+                                <span class="fas fa-circle"></span>
+                                <span class="fas fa-circle"></span>
+                                <span class="fas fa-circle"></span>
+                            </div>
+                        </div>
+                        <div id="post-data">
+                            <p>
+                                {{this.text}}
+                            </p>
+                            <p id="post-translation">
+                                <button>See translation</button>
+                            </p>
+                            <img src={{this.photo}} alt="" />
+                        </div>
+                        <div id="post-interactions">
+                            <div id="interactions-amount">
+                                <span
+                                    id="like-icon"
+                                    class="fas fa-thumbs-up fa-flip-horizontal"
+                                ></span>
+                
+                                <span id="amount-info"
+                                    >{{this.post_stat.likes}} <span>&nbsp;·&nbsp;</span> {{this.post_stat.comments.length}}
+                                    Comments</span
+                                >
+                            </div>
+                            <div id="interactions-btns">
+                                <button>
+                                    <span
+                                        class="far fa-thumbs-up fa-flip-horizontal "
+                                    ></span>
+                                    <span>Like</span>
+                                </button>
+                                <button>
+                                    <span
+                                        class="far fa-comment-dots fa-flip-horizontal"
+                                    ></span>
+                                    <span>Comment</span>
+                                </button>
+                                <button id = "share" value = {{this.__id}}>
+                                    <span class="far fa-share-square"></span>
+                                    <span>Share</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                       {{/each}}
+                    </div>
+                    
+
+                    {{else}}
+                    <div>
+                         <h4 style="text-align: center;">No post currently present!</h4>
+                    </div>
+                       
+                    {{/if}}
+                    
+                </main>
+            </div>
+        </div>
+    </body>
+
+    <script src="./js/script.js"></script>
+    <script src="https://kit.fontawesome.com/3055f91a99.js"></script>
+    <script src="./js/share.js"></script>
+
+</html>
