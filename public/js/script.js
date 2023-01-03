@@ -67,40 +67,9 @@ function waitPageLoading() {
         header.style.display = "flex";
         container.style.display = "grid";
 
-        if (navigator.appVersion.indexOf("Chrome/") != -1) {
-            const profileName = document.getElementById("profile-name");
-            const postAuthorName = document.getElementById("post-author-name");
-
-            const profileSquare = document.getElementById("profile-square");
-
-            const elements = [profileName, postAuthorName];
-
-            console.log(elements);
-
-            elements.map((element) => {
-                element.classList.add("letter-spacing");
-            });
-
-            profileSquare.classList.add("font-16");
-        }
     }, 2000);
 }
 
-window.addEventListener("scroll", (e) => {
-    const profileGroup = document.getElementById("profile-groups");
-    const linkedinSection = document.getElementById("linkedin-section");
-    const rightAside = document.getElementById("right-aside");
-
-    if (window.scrollY > 356) {
-        profileGroup.classList.add("position-fixed");
-        linkedinSection.classList.add("position-fixed", "right-aside-fixed");
-        rightAside.classList.add("vanish");
-    } else {
-        profileGroup.classList.remove("position-fixed");
-        linkedinSection.classList.remove("position-fixed", "right-aside-fixed");
-        rightAside.classList.remove("vanish");
-    }
-});
 
 waitPageLoading();
 

@@ -2,12 +2,12 @@ const express = require('express');
 const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const PORT = 3000;
+const PORT = 80;
 const path = require("path");
 require("./db/conn");
 const model = require("./db/model")
-var hbs = require('hbs');
-const res = require('express/lib/response');
+const hbs = require('hbs');
+
 
 
 app.set('view engine', 'hbs');
@@ -18,12 +18,40 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
 
 
+app.get('/', async(req, res)=>{
+	
+    let data = await model.find();
+    // console.log(data);
+    res.render("index" , {
+        "data" : data
+    });
+
+});
+
+app.get("/post" , (req,res)=>{
+    res.render("writePost")
+});
+
+
 app.post("/publish" , async(req,res)=>{
     try{
-         let data = await model(req.body);
-             await data.save();
+        console.log(req.body);
+        let data = await model(req.body);
 
-             res.send("data saved successfully!");
+        let resp = await data.save();
+
+        if(resp != null){
+            res.status(201).json({
+                status: 201
+            })
+        }
+        else{
+            res.status(402).json({
+                status: 402
+            })
+        }
+            
+        
 
     }
     catch(Exception){
@@ -52,28 +80,59 @@ app.post("/update" , async(req,res)=>{
 
 });
 
-app.get('/', async(req, res)=>{
-	
-    let data = await model.find();
-    console.log(data);
-    res.render("index" , {
+app.get("/post/:id",async(req,res)=>{
+    try {
+      let data =   await model.find({_id:req.params.id});
+      res.render("index" , {
         "data" : data
-    });
-
+      });
+        
+    } catch (error) {
+        console.log(error);
+        res.send(error);
+    }
 });
 
-app.get("/post" , (req,res)=>{
-    res.render("writePost")
-});
+app.put("/post/:id", async(req,res)=>{
+    try{
+       let data = await model.findOne({_id:req.params.id});
+       data.number_of_reports =   data.number_of_reports + 1 ;
+       await data.save();
 
+       res.status(200).json({
+        status : 200
+    })
 
+    }
+    catch(Exception){
+        res.status(403).json({
+            status : 403
+        })
+    }
+})
+
+app.delete("/post/:id" , async(req,res)=>{
+    try {
+        let data =   await model.deleteOne({_id:req.params.id});
+        if(data != null){
+            res.status(200).json({
+                status : 200
+            })
+        }
+          
+      } catch (error) {
+          console.log(error);
+          res.status(403).json({
+            status : 403
+        })
+      }
+})
 
 
 app.listen(PORT, (error) =>{
 	if(!error)
 		{
-            console.log("Server is Successfully Running,and App is listening on port "+ PORT)
-            console.log("\n");
+            console.log("Server is Running at  "+ PORT);
         }
 	else
 		console.log("Error occurred, server can't start", error);

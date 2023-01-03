@@ -14,6 +14,10 @@ const model = mongoose.Schema({
         type:String,
 
     },
+    number_of_reports:{
+        type:Number,
+        default:0
+    },
     post_stat:{
         likes : {
             type:String,
