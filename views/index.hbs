@@ -201,15 +201,16 @@
                                 ></span>
                 
                                 <span id="amount-info"
-                                    >{{this.post_stat.likes}} <span>&nbsp;·&nbsp;</span> {{this.post_stat.comments.length}}
-                                    Comments</span
+                                    >{{this.post_stat.likes}}<span>&nbsp; .&nbsp;</span>{{this.post_stat.comments.length}}
+views/index.hbs                                    Comments</span
                                 >
                             </div>
                             <div id="interactions-btns">
-                                <button>
+                                <button  onclick="change()" >
                                     <span
-                                        class="far fa-thumbs-up fa-flip-horizontal "
-                                    ></span>
+                                        class="fa-regular fa-thumbs-up" id="likeme_change">
+                                        
+                                    </span>
                                     <span>Like</span>
                                 </button>
                                 <button>
@@ -245,6 +246,7 @@
     <script src="https://kit.fontawesome.com/3055f91a99.js"></script>
     <script src="/js/share.js"></script>
    <script src="/js/handleFunctionality.js"></script>
+   <script src="/js/likes.js"></script>
 
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
