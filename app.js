@@ -128,6 +128,28 @@ app.delete("/post/:id" , async(req,res)=>{
       }
 })
 
+app.patch("/comment/:id" , async(req,res)=>{
+      
+    let requestedData = req.body.data;
+    // console.log(requestedData);
+
+    try {
+        let data = await model.findOne({_id:req.params.id});
+        if(data != null){
+            data.post_stat.comments.push(requestedData);
+            await data.save();
+            res.status(201).json({
+                status:201
+            })
+        }
+    } catch (error) {
+        res.status(500).json({
+            status:500
+        })
+    }
+
+})
+
 
 app.listen(PORT, (error) =>{
 	if(!error)

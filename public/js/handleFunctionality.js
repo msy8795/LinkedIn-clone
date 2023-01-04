@@ -53,3 +53,35 @@ const handleReport = async(id) =>{
        }
 
 }
+
+
+const postComment = async(id) =>{
+    const element = "user_comment_"+id
+    const data = document.getElementById(element).value;
+    // alert("data is: " + data);
+    
+    
+    const response = await fetch("/comment/" + id , {
+      method:"PATCH",
+      headers :{
+        "Accept":"application/json",
+        "Content-Type" : "application/json"
+      },
+      body : JSON.stringify({
+        data
+      })
+  
+     });
+  
+     const res =  await response.json();
+     if(res.status == 201){
+        alert("Comment is Added to this Post")
+        window.location.href = "/";
+     }
+     else{
+      alert("Some Error Occured");
+     }
+
+      
+
+}
