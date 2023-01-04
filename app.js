@@ -63,10 +63,6 @@ app.post("/publish" , async(req,res)=>{
 
 app.post("/update" , async(req,res)=>{
     try{
-         let _id=res.id;
-         let obj=db.test.find({_id:id});
-
-
          let data = await model(req.body);
              await data.save();
 
