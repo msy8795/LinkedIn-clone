@@ -128,42 +128,68 @@ app.delete("/post/:id" , async(req,res)=>{
       }
 })
 
-app.get("/post/like/:id" , async(req,res)=>{
-    try{
+app.patch("/comment/:id" , async(req,res)=>{
+      
+    let requestedData = req.body.data;
+    // console.log(requestedData);
+
+    try {
         let data = await model.findOne({_id:req.params.id});
-        data.post_stat.likes =   Number(data.post_stat.likes) + 1 ;
+        if(data != null){
+            data.post_stat.comments.push(requestedData);
+            await data.save();
+            res.status(201).json({
+                status:201
+            })
+        }
+    } catch (error) {
+        res.status(500).json({
+            status:500
+        })
+    }
+
+})
+
+app.get("/post/like/:id", async(req,res)=>{
+
+    try {
+
+        let data = await model.findOne({_id:req.params.id});
+        data.post_stat.likes =  Number(data.post_stat.likes) + 1 ;
         await data.save();
  
         res.status(201).json({
          status : 201
      })
- 
-     }
-     catch(Exception){
-         res.status(403).json({
-             status : 403
-         })
-     }
-} )
+        
+    } catch (error) {
+        res.status(401).json({
+            status : 401
+        })
+    }
 
+})
 
-app.get("/post/dislike/:id" , async(req,res)=>{
-    try{
+app.get("/post/dislike/:id", async(req,res)=>{
+
+    try {
+
         let data = await model.findOne({_id:req.params.id});
-        data.post_stat.likes =   Number(data.post_stat.likes) - 1 ;
+        data.post_stat.likes =  Number(data.post_stat.likes) - 1 ;
         await data.save();
  
         res.status(201).json({
          status : 201
      })
- 
-     }
-     catch(Exception){
-         res.status(403).json({
-             status : 403
-         })
-     }
-} )
+        
+    } catch (error) {
+        res.status(401).json({
+            status : 401
+        })
+    }
+
+})
+
 
 
 app.listen(PORT, (error) =>{

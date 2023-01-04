@@ -20,7 +20,11 @@ function change(id)
         element.classList.remove("fa-thumbs-up");
         element.className="fa-solid fa-thumbs-up";
         let liked_posts_array = JSON.parse(localStorage.getItem("liked_posts"));
-        liked_posts_array.push(post_id);
+        
+        if(isElementPresent(post_id , liked_posts_array) == -1){
+            liked_posts_array.push(post_id);
+        }
+        
         localStorage.setItem("liked_posts" , JSON.stringify(liked_posts_array))
         handleLike(post_id);
        
@@ -111,3 +115,9 @@ function handleLikeButtonColor(){
 }
 
 handleLikeButtonColor();
+
+function isElementPresent(element, arr ){
+
+    return arr.indexOf(element);
+
+}
