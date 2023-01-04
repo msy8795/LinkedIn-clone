@@ -128,6 +128,43 @@ app.delete("/post/:id" , async(req,res)=>{
       }
 })
 
+app.get("/post/like/:id" , async(req,res)=>{
+    try{
+        let data = await model.findOne({_id:req.params.id});
+        data.post_stat.likes =   Number(data.post_stat.likes) + 1 ;
+        await data.save();
+ 
+        res.status(201).json({
+         status : 201
+     })
+ 
+     }
+     catch(Exception){
+         res.status(403).json({
+             status : 403
+         })
+     }
+} )
+
+
+app.get("/post/dislike/:id" , async(req,res)=>{
+    try{
+        let data = await model.findOne({_id:req.params.id});
+        data.post_stat.likes =   Number(data.post_stat.likes) - 1 ;
+        await data.save();
+ 
+        res.status(201).json({
+         status : 201
+     })
+ 
+     }
+     catch(Exception){
+         res.status(403).json({
+             status : 403
+         })
+     }
+} )
+
 
 app.listen(PORT, (error) =>{
 	if(!error)

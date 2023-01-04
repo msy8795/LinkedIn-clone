@@ -201,14 +201,14 @@
                                 ></span>
                 
                                 <span id="amount-info"
-                                    >{{this.post_stat.likes}}<span>&nbsp; .&nbsp;</span>{{this.post_stat.comments.length}}
-views/index.hbs                                    Comments</span
+                                    >{{this.post_stat.likes}}<span>&nbsp;.&nbsp;</span>{{this.post_stat.comments.length}}
+Comments</span
                                 >
                             </div>
                             <div id="interactions-btns">
-                                <button  onclick="change()" >
+                                <button id="id_{{this._id}}" onclick="change(this.id)" >
                                     <span
-                                        class="fa-regular fa-thumbs-up" id="likeme_change">
+                                        class="fa-regular fa-thumbs-up" id="likeme_change_{{this._id}}">
                                         
                                     </span>
                                     <span>Like</span>
