@@ -1,4 +1,10 @@
 
+
+let post_liked = [];
+if(localStorage.getItem("liked_posts") == null){
+    localStorage.setItem("liked_posts" , JSON.stringify(post_liked))
+}
+
 function change(id)
 {
     const post_id = id.substring(3);
@@ -13,17 +19,32 @@ function change(id)
         element.classList.remove("fa-regular");
         element.classList.remove("fa-thumbs-up");
         element.className="fa-solid fa-thumbs-up";
+        let liked_posts_array = JSON.parse(localStorage.getItem("liked_posts"));
+        liked_posts_array.push(post_id);
+        localStorage.setItem("liked_posts" , JSON.stringify(liked_posts_array))
         handleLike(post_id);
+       
+       
         
     }
     else{
         
        
-        element.classList.remove("fa-regular");
+        element.classList.remove("fa-solid");
         element.classList.remove("fa-thumbs-up");
         
         element.className="fa-regular fa-thumbs-up";
+        let liked_posts_array = JSON.parse(localStorage.getItem("liked_posts"));
+
+        const index = liked_posts_array.indexOf(post_id);
+if (index > -1) { 
+    liked_posts_array.splice(index, 1); 
+}
+
+        
+        localStorage.setItem("liked_posts" , JSON.stringify(liked_posts_array))
         handleDisLike(post_id);
+        
 
     }
 
@@ -74,3 +95,19 @@ async function handleDisLike(id){
 
 
 }
+
+function handleLikeButtonColor(){
+    if(localStorage.getItem("liked_posts") != null){
+        let post_array = JSON.parse(localStorage.getItem("liked_posts"));
+        post_array.map(e =>{
+            const full_elem ="likeme_change_" + e ;
+            let element=document.getElementById(full_elem);
+            element.classList.remove("fa-regular");
+            element.classList.remove("fa-thumbs-up");
+            element.className="fa-solid fa-thumbs-up";
+
+        });
+    }
+}
+
+handleLikeButtonColor();
